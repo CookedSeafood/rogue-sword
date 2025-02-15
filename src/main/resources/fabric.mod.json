@@ -1,0 +1,40 @@
+{
+	"schemaVersion": 1,
+	"id": "roguesword",
+	"version": "${version}",
+	"name": "RogueSword",
+	"description": "A sword that gives a 30 second speed effect for 16777216 mana when right-clicked.",
+	"authors": [
+		{
+			"name": "CookedSeafood",
+			"contact": {
+				"homepage": "https://github.com/CookedSeafood"
+			}
+		}
+	],
+	"contact": {
+		"homepage": "https://modrinth.com/mod/RogueSword",
+		"sources": "https://github.com/CookedSeafood/RogueSword"
+	},
+	"license": "GNU-GPL-3.0",
+	"icon": "assets/roguesword/icon.png",
+	"environment": "*",
+	"entrypoints": {
+		"main": [
+			"net.cookedseafood.roguesword.RogueSword"
+		]
+	},
+	"mixins": [
+		"roguesword.mixins.json"
+	],
+	"depends": {
+		"fabricloader": ">=0.16.10",
+		"minecraft": "1.21.4",
+		"java": ">=21",
+		"fabric-api": "*",
+		"pentamana": ">=0.3.1"
+	},
+	"suggests": {
+		"another-mod": "*"
+	}
+}
