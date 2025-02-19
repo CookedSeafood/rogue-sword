@@ -1,6 +1,6 @@
 # RogueSword
 
-A sword that gives a 30 second speed effect for 16777216 mana when right-clicked.
+A sword that gives a 30 second speed effect for 1 point mana when right-clicked.
 
 A "Rogue Sword" is an item where `minecraft:item_name` is "Rogue Sword".
 
@@ -22,7 +22,7 @@ Below is a template config file `config/roguesword.json` filled with default val
 
 ```json
 {
-  "manaConsumption": 16777216,
+  "manaConsumption": 65536,
   "statusEffectDuration": 600,
   "statusEffectAmplifier": 0,
   "statusEffectAmbient": false,
