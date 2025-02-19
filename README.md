@@ -16,19 +16,19 @@ Get the original design of it:
 /give @s golden_sword[item_name="Rogue Sword",rarity=uncommon]
 ```
 
-## Config
+## Configuration
 
 Below is a template config file `config/roguesword.json` filled with default values. You may only need to write the lines you would like to modify.
 
 ```json
 {
-  "manaConsumption": 65536,
-  "statusEffectDuration": 600,
-  "statusEffectAmplifier": 0,
-  "statusEffectAmbient": false,
-  "statusEffectShowParticles": true,
-  "statusEffectShowIcon": true
+  "manaPointConsumption": 65536,
+  "speedDuration": 600,
+  "speedAmplifier": 0,
+  "speedAmbient": false,
+  "speedShowParticles": true,
+  "speedShowIcon": true
 }
 ```
 
-- `manaConsumption`: Amount of mana will be consumed per use.
+- `manaPointConsumption`: Amount of mana point will be consumed per use.
