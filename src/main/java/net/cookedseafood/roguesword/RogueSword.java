@@ -34,21 +34,23 @@ public class RogueSword implements ModInitializer {
 	
 	public static final byte VERSION_MAJOR = 1;
 	public static final byte VERSION_MINOR = 1;
-	public static final byte VERSION_PATCH = 1;
+	public static final byte VERSION_PATCH = 2;
 
-	public static final int MANA_CONSUMPTION = Pentamana.manaPerPoint;
+	public static final int MANA_POINT_CONSUMPTION = 1;
 	public static final int STATUS_EFFECT_DURATION = 600;
 	public static final int STATUS_EFFECT_AMPLIFIER = 0;
 	public static final boolean STATUS_EFFECT_AMBIENT = false;
 	public static final boolean STATUS_EFFECT_SHOW_PARTICLES = true;
 	public static final boolean STATUS_EFFECT_SHOW_ICON = true;
 
+	public static int manaPointConsumption;
+	public static int speedDuration;
+	public static int speedAmplifier;
+	public static boolean speedAmbient;
+	public static boolean speedShowParticles;
+	public static boolean speedShowIcon;
+
 	public static int manaConsumption;
-	public static int statusEffectDuration;
-	public static int statusEffectAmplifier;
-	public static boolean statusEffectAmbient;
-	public static boolean statusEffectShowParticles;
-	public static boolean statusEffectShowIcon;
 
 	@Override
 	public void onInitialize() {
@@ -87,7 +89,7 @@ public class RogueSword implements ModInitializer {
 				e.printStackTrace();
 			}
 
-			player.addStatusEffect(new StatusEffectInstance(StatusEffects.SPEED, statusEffectDuration, statusEffectAmplifier, statusEffectAmbient, statusEffectShowParticles, statusEffectShowIcon), player);
+			player.addStatusEffect(new StatusEffectInstance(StatusEffects.SPEED, speedDuration, speedAmplifier, speedAmbient, speedShowParticles, speedShowIcon), player);
 			return ActionResult.PASS;
 		});
 	}
@@ -98,44 +100,51 @@ public class RogueSword implements ModInitializer {
 			configString = FileUtils.readFileToString(new File("./config/roguesword.json"), StandardCharsets.UTF_8);
 		} catch (IOException e) {
             reset();
+			reCalc();
 			return 1;
 		}
 
 		JsonObject config = new Gson().fromJson(configString, JsonObject.class);
 
-		manaConsumption =
+		manaPointConsumption =
 			config.has("manaConsumption") ?
 			config.get("manaConsumption").getAsInt() :
-			MANA_CONSUMPTION;
-		statusEffectDuration =
-			config.has("statusEffectDuration") ?
-			config.get("statusEffectDuration").getAsInt() :
+			MANA_POINT_CONSUMPTION;
+		speedDuration =
+			config.has("speedDuration") ?
+			config.get("speedDuration").getAsInt() :
 			STATUS_EFFECT_DURATION;
-		statusEffectAmplifier =
-			config.has("statusEffectAmplifier") ?
-			config.get("statusEffectAmplifier").getAsInt() :
+		speedAmplifier =
+			config.has("speedAmplifier") ?
+			config.get("speedAmplifier").getAsInt() :
 			STATUS_EFFECT_AMPLIFIER;
-		statusEffectAmbient =
-			config.has("statusEffectAmbient") ?
-			config.get("statusEffectAmbient").getAsBoolean() :
+		speedAmbient =
+			config.has("speedAmbient") ?
+			config.get("speedAmbient").getAsBoolean() :
 			STATUS_EFFECT_AMBIENT;
-		statusEffectShowParticles =
-			config.has("statusEffectShowParticles") ?
-			config.get("statusEffectShowParticles").getAsBoolean() :
+		speedShowParticles =
+			config.has("speedShowParticles") ?
+			config.get("speedShowParticles").getAsBoolean() :
 			STATUS_EFFECT_SHOW_PARTICLES;
-		statusEffectShowIcon =
-			config.has("statusEffectShowIcon") ?
-			config.get("statusEffectShowIcon").getAsBoolean() :
+		speedShowIcon =
+			config.has("speedShowIcon") ?
+			config.get("speedShowIcon").getAsBoolean() :
 			STATUS_EFFECT_SHOW_ICON;
+
+		reCalc();
 		return 2;
 	}
 
 	public static void reset() {
-		manaConsumption = MANA_CONSUMPTION;
-		statusEffectDuration = STATUS_EFFECT_DURATION;
-		statusEffectAmplifier = STATUS_EFFECT_AMPLIFIER;
-		statusEffectAmbient = STATUS_EFFECT_AMBIENT;
-		statusEffectShowParticles = STATUS_EFFECT_SHOW_PARTICLES;
-		statusEffectShowIcon = STATUS_EFFECT_SHOW_ICON;
+		manaPointConsumption = MANA_POINT_CONSUMPTION;
+		speedDuration = STATUS_EFFECT_DURATION;
+		speedAmplifier = STATUS_EFFECT_AMPLIFIER;
+		speedAmbient = STATUS_EFFECT_AMBIENT;
+		speedShowParticles = STATUS_EFFECT_SHOW_PARTICLES;
+		speedShowIcon = STATUS_EFFECT_SHOW_ICON;
+	}
+
+	public static void reCalc() {
+		manaConsumption = Pentamana.manaPerPoint * manaPointConsumption;
 	}
 }
