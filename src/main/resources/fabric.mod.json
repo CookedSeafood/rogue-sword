@@ -3,7 +3,7 @@
 	"id": "roguesword",
 	"version": "${version}",
 	"name": "RogueSword",
-	"description": "A sword that gives a 30 second speed effect for 16777216 mana when right-clicked.",
+	"description": "A sword that gives a 30 second speed effect for 1 point mana when right-clicked.",
 	"authors": [
 		{
 			"name": "CookedSeafood",
@@ -32,7 +32,7 @@
 		"minecraft": "1.21.4",
 		"java": ">=21",
 		"fabric-api": "*",
-		"pentamana": ">=0.3.1"
+		"pentamana": ">=0.3.7"
 	},
 	"suggests": {
 		"another-mod": "*"

@@ -6,6 +6,8 @@ import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
+
+import net.cookedseafood.pentamana.Pentamana;
 import net.cookedseafood.pentamana.command.ManaCommand;
 import net.cookedseafood.roguesword.command.RogueSwordCommand;
 import net.fabricmc.api.ModInitializer;
@@ -32,9 +34,9 @@ public class RogueSword implements ModInitializer {
 	
 	public static final byte VERSION_MAJOR = 1;
 	public static final byte VERSION_MINOR = 1;
-	public static final byte VERSION_PATCH = 0;
+	public static final byte VERSION_PATCH = 1;
 
-	public static final int MANA_CONSUMPTION = 16777216;
+	public static final int MANA_CONSUMPTION = Pentamana.manaPerPoint;
 	public static final int STATUS_EFFECT_DURATION = 600;
 	public static final int STATUS_EFFECT_AMPLIFIER = 0;
 	public static final boolean STATUS_EFFECT_AMBIENT = false;
