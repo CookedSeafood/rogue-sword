@@ -32,7 +32,7 @@
 		"minecraft": "1.21.4",
 		"java": ">=21",
 		"fabric-api": "*",
-		"pentamana": ">=0.3.8"
+		"pentamana": ">=0.3.10"
 	},
 	"suggests": {
 		"another-mod": "*"

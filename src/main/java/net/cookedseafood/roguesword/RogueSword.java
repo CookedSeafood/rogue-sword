@@ -34,7 +34,7 @@ public class RogueSword implements ModInitializer {
 	
 	public static final byte VERSION_MAJOR = 1;
 	public static final byte VERSION_MINOR = 1;
-	public static final byte VERSION_PATCH = 2;
+	public static final byte VERSION_PATCH = 3;
 
 	public static final int MANA_POINT_CONSUMPTION = 1;
 	public static final int STATUS_EFFECT_DURATION = 600;
@@ -77,7 +77,13 @@ public class RogueSword implements ModInitializer {
 			ServerCommandSource source = world.getServer().getPlayerManager().getPlayer(player.getUuid()).getCommandSource();
 
 			try {
-				if (ManaCommand.executeGetEnabled(source) != 1) {
+				int playerEnabled = ManaCommand.executeGetEnabled(source);
+				boolean enabled =
+					playerEnabled == 0 ?
+					Pentamana.enabled :
+					playerEnabled == 1;
+
+				if (enabled == false) {
 					return ActionResult.PASS;
 				}
 
