@@ -2,13 +2,12 @@ package net.cookedseafood.roguesword;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
-import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
-
 import net.cookedseafood.pentamana.Pentamana;
-import net.cookedseafood.pentamana.command.ManaCommand;
+import net.cookedseafood.pentamana.component.ManaPreference;
+import net.cookedseafood.pentamana.component.ManaStatus;
 import net.cookedseafood.roguesword.command.RogueSwordCommand;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
@@ -17,7 +16,6 @@ import net.fabricmc.fabric.api.event.player.UseItemCallback;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.item.ItemStack;
-import net.minecraft.server.command.ServerCommandSource;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import org.apache.commons.io.FileUtils;
@@ -25,7 +23,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class RogueSword implements ModInitializer {
-	public static final String MOD_ID = "roguesword";
+	public static final String MOD_ID = "rogue-sword";
 
 	// This logger is used to write text to the console and the log file.
 	// It is considered best practice to use your mod id as the logger's name.
@@ -34,7 +32,7 @@ public class RogueSword implements ModInitializer {
 	
 	public static final byte VERSION_MAJOR = 1;
 	public static final byte VERSION_MINOR = 1;
-	public static final byte VERSION_PATCH = 3;
+	public static final byte VERSION_PATCH = 4;
 
 	public static final int MANA_POINT_CONSUMPTION = 1;
 	public static final int STATUS_EFFECT_DURATION = 600;
@@ -73,26 +71,13 @@ public class RogueSword implements ModInitializer {
 			if (!"Rogue Sword".equals(stack.getItemName().getString())) {
 				return ActionResult.PASS;
 			}
-			
-			ServerCommandSource source = world.getServer().getPlayerManager().getPlayer(player.getUuid()).getCommandSource();
 
-			try {
-				int playerEnabled = ManaCommand.executeGetEnabled(source);
-				boolean enabled =
-					playerEnabled == 0 ?
-					Pentamana.enabled :
-					playerEnabled == 1;
+			if (!ManaPreference.MANA_PREFERENCE.get(player).getEnabled()) {
+				return ActionResult.PASS;
+			}
 
-				if (enabled == false) {
-					return ActionResult.PASS;
-				}
-
-				ManaCommand.executeSetManaConsum(source, manaConsumption);
-				if (ManaCommand.executeConsume(source) == 0) {
-					return ActionResult.PASS;
-				}
-			} catch (CommandSyntaxException e) {
-				e.printStackTrace();
+			if (ManaStatus.MANA_STATUS.get(player).consum(player, manaConsumption) == 0.0f) {
+				return ActionResult.PASS;
 			}
 
 			player.addStatusEffect(new StatusEffectInstance(StatusEffects.SPEED, speedDuration, speedAmplifier, speedAmbient, speedShowParticles, speedShowIcon), player);
@@ -103,7 +88,7 @@ public class RogueSword implements ModInitializer {
 	public static int reload() {
 		String configString;
 		try {
-			configString = FileUtils.readFileToString(new File("./config/roguesword.json"), StandardCharsets.UTF_8);
+			configString = FileUtils.readFileToString(new File("./config/rogue-sword.json"), StandardCharsets.UTF_8);
 		} catch (IOException e) {
             reset();
 			reCalc();

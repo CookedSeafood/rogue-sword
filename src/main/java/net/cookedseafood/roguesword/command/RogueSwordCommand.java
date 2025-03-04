@@ -27,12 +27,12 @@ public class RogueSwordCommand {
     }
 
     public static int executeReload(ServerCommandSource source) {
-        source.sendFeedback(() -> Text.literal("Reloading RogueSword!"), true);
+        source.sendFeedback(() -> Text.literal("Reloading Rogue Sword!"), true);
         return RogueSword.reload();
 	}
 
     public static int executeVersion(ServerCommandSource source) {
-        source.sendFeedback(() -> Text.literal("RogueSword " + RogueSword.VERSION_MAJOR + "." + RogueSword.VERSION_MINOR + "." + RogueSword.VERSION_PATCH), false);
+        source.sendFeedback(() -> Text.literal("Rogue Sword " + RogueSword.VERSION_MAJOR + "." + RogueSword.VERSION_MINOR + "." + RogueSword.VERSION_PATCH), false);
         return 0;
     }
 }
