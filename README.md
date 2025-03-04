@@ -18,11 +18,11 @@ Get the original design of it:
 
 ## Configuration
 
-Below is a template config file `config/roguesword.json` filled with default values. You may only need to write the lines you would like to modify.
+Below is a template config file `config/rogue-sword.json` filled with default values. You may only need to write the lines you would like to modify.
 
 ```json
 {
-  "manaPointConsumption": 65536,
+  "manaPointConsumption": 1,
   "speedDuration": 600,
   "speedAmplifier": 0,
   "speedAmbient": false,
