@@ -32,7 +32,7 @@ public class RogueSword implements ModInitializer {
 	
 	public static final byte VERSION_MAJOR = 1;
 	public static final byte VERSION_MINOR = 1;
-	public static final byte VERSION_PATCH = 4;
+	public static final byte VERSION_PATCH = 5;
 
 	public static final int MANA_POINT_CONSUMPTION = 1;
 	public static final int STATUS_EFFECT_DURATION = 600;

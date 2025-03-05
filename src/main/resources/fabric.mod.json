@@ -32,7 +32,7 @@
 		"minecraft": "1.21.4",
 		"java": ">=21",
 		"fabric-api": "*",
-		"cca": ">=6.2.2",
+		"cardinal-components-base": ">=6.2.2",
 		"pentamana": ">=0.4.1"
 	},
 	"suggests": {
