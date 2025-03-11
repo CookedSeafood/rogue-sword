@@ -32,7 +32,7 @@ public class RogueSword implements ModInitializer {
 	
 	public static final byte VERSION_MAJOR = 1;
 	public static final byte VERSION_MINOR = 1;
-	public static final byte VERSION_PATCH = 5;
+	public static final byte VERSION_PATCH = 6;
 
 	public static final int MANA_POINT_CONSUMPTION = 1;
 	public static final int STATUS_EFFECT_DURATION = 600;
@@ -59,7 +59,7 @@ public class RogueSword implements ModInitializer {
 		CommandRegistrationCallback.EVENT.register((dispatcher, registryAccess, environment) -> RogueSwordCommand.register(dispatcher, registryAccess));
 
 		ServerLifecycleEvents.SERVER_STARTED.register(server -> {
-			RogueSwordCommand.executeReload(server.getCommandSource());
+			RogueSword.reload();
 		});
 
 		UseItemCallback.EVENT.register((player, world, hand) -> {
@@ -72,7 +72,7 @@ public class RogueSword implements ModInitializer {
 				return ActionResult.PASS;
 			}
 
-			if (!ManaPreference.MANA_PREFERENCE.get(player).getEnabled()) {
+			if (!ManaPreference.MANA_PREFERENCE.get(player).isEnabled()) {
 				return ActionResult.PASS;
 			}
 
