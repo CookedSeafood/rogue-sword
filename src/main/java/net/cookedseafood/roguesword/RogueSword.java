@@ -6,8 +6,8 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import net.cookedseafood.pentamana.Pentamana;
-import net.cookedseafood.pentamana.component.ManaPreference;
-import net.cookedseafood.pentamana.component.ManaStatus;
+import net.cookedseafood.pentamana.component.ManaPreferenceComponentImpl;
+import net.cookedseafood.pentamana.component.ServerManaBarComponentImpl;
 import net.cookedseafood.roguesword.command.RogueSwordCommand;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
@@ -32,7 +32,7 @@ public class RogueSword implements ModInitializer {
 	
 	public static final byte VERSION_MAJOR = 1;
 	public static final byte VERSION_MINOR = 1;
-	public static final byte VERSION_PATCH = 6;
+	public static final byte VERSION_PATCH = 7;
 
 	public static final int MANA_POINT_CONSUMPTION = 1;
 	public static final int STATUS_EFFECT_DURATION = 600;
@@ -72,11 +72,11 @@ public class RogueSword implements ModInitializer {
 				return ActionResult.PASS;
 			}
 
-			if (!ManaPreference.MANA_PREFERENCE.get(player).isEnabled()) {
+			if (!ManaPreferenceComponentImpl.MANA_PREFERENCE.get(player).isEnabled()) {
 				return ActionResult.PASS;
 			}
 
-			if (ManaStatus.MANA_STATUS.get(player).consum(player, manaConsumption) == 0.0f) {
+			if (!ServerManaBarComponentImpl.SERVER_MANA_BAR.get(player).getServerManaBar().consum(manaConsumption)) {
 				return ActionResult.PASS;
 			}
 
