@@ -6,8 +6,8 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import net.cookedseafood.pentamana.Pentamana;
-import net.cookedseafood.pentamana.component.ManaPreferenceComponentImpl;
-import net.cookedseafood.pentamana.component.ServerManaBarComponentImpl;
+import net.cookedseafood.pentamana.component.ManaPreferenceComponentInstance;
+import net.cookedseafood.pentamana.component.ServerManaBarComponentInstance;
 import net.cookedseafood.roguesword.command.RogueSwordCommand;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
@@ -19,6 +19,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.lang3.mutable.MutableInt;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -32,7 +33,7 @@ public class RogueSword implements ModInitializer {
 	
 	public static final byte VERSION_MAJOR = 1;
 	public static final byte VERSION_MINOR = 1;
-	public static final byte VERSION_PATCH = 7;
+	public static final byte VERSION_PATCH = 9;
 
 	public static final int MANA_POINT_CONSUMPTION = 1;
 	public static final int STATUS_EFFECT_DURATION = 600;
@@ -72,11 +73,11 @@ public class RogueSword implements ModInitializer {
 				return ActionResult.PASS;
 			}
 
-			if (!ManaPreferenceComponentImpl.MANA_PREFERENCE.get(player).isEnabled()) {
+			if (!ManaPreferenceComponentInstance.MANA_PREFERENCE.get(player).isEnabled()) {
 				return ActionResult.PASS;
 			}
 
-			if (!ServerManaBarComponentImpl.SERVER_MANA_BAR.get(player).getServerManaBar().consum(manaConsumption)) {
+			if (!ServerManaBarComponentInstance.SERVER_MANA_BAR.get(player).getServerManaBar().consum(manaConsumption)) {
 				return ActionResult.PASS;
 			}
 
@@ -96,34 +97,52 @@ public class RogueSword implements ModInitializer {
 		}
 
 		JsonObject config = new Gson().fromJson(configString, JsonObject.class);
+		MutableInt counter = new MutableInt(0);
 
-		manaPointConsumption =
-			config.has("manaConsumption") ?
-			config.get("manaConsumption").getAsInt() :
-			MANA_POINT_CONSUMPTION;
-		speedDuration =
-			config.has("speedDuration") ?
-			config.get("speedDuration").getAsInt() :
-			STATUS_EFFECT_DURATION;
-		speedAmplifier =
-			config.has("speedAmplifier") ?
-			config.get("speedAmplifier").getAsInt() :
-			STATUS_EFFECT_AMPLIFIER;
-		speedAmbient =
-			config.has("speedAmbient") ?
-			config.get("speedAmbient").getAsBoolean() :
-			STATUS_EFFECT_AMBIENT;
-		speedShowParticles =
-			config.has("speedShowParticles") ?
-			config.get("speedShowParticles").getAsBoolean() :
-			STATUS_EFFECT_SHOW_PARTICLES;
-		speedShowIcon =
-			config.has("speedShowIcon") ?
-			config.get("speedShowIcon").getAsBoolean() :
-			STATUS_EFFECT_SHOW_ICON;
+		if (config.has("manaPointConsumption")) {
+			manaPointConsumption = config.get("manaPointConsumption").getAsInt();
+			counter.increment();
+		} else {
+			manaPointConsumption = MANA_POINT_CONSUMPTION;
+		}
+
+		if (config.has("speedDuration")) {
+			speedDuration = config.get("speedDuration").getAsInt();
+			counter.increment();
+		} else {
+			speedDuration = STATUS_EFFECT_DURATION;
+		}
+
+		if (config.has("speedAmplifier")) {
+			speedAmplifier = config.get("speedAmplifier").getAsInt();
+			counter.increment();
+		} else {
+			speedAmplifier = STATUS_EFFECT_AMPLIFIER;
+		}
+
+		if (config.has("speedAmbient")) {
+			speedAmbient = config.get("speedAmbient").getAsBoolean();
+			counter.increment();
+		} else {
+			speedAmbient = STATUS_EFFECT_AMBIENT;
+		}
+
+		if (config.has("speedShowParticles")) {
+			speedShowParticles = config.get("speedShowParticles").getAsBoolean();
+			counter.increment();
+		} else {
+			speedShowParticles = STATUS_EFFECT_SHOW_PARTICLES;
+		}
+
+		if (config.has("speedShowIcon")) {
+			speedShowIcon = config.get("speedShowIcon").getAsBoolean();
+			counter.increment();
+		} else {
+			speedShowIcon = STATUS_EFFECT_SHOW_ICON;
+		}
 
 		reCalc();
-		return 2;
+		return counter.intValue();
 	}
 
 	public static void reset() {
