@@ -5,7 +5,6 @@ import com.google.gson.JsonObject;
 import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
-import net.cookedseafood.pentamana.Pentamana;
 import net.cookedseafood.pentamana.component.ManaPreferenceComponentInstance;
 import net.cookedseafood.pentamana.component.ServerManaBarComponentInstance;
 import net.cookedseafood.roguesword.command.RogueSwordCommand;
@@ -30,26 +29,24 @@ public class RogueSword implements ModInitializer {
 	// It is considered best practice to use your mod id as the logger's name.
 	// That way, it's clear which mod wrote info, warnings, and errors.
 	public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
-	
+
 	public static final byte VERSION_MAJOR = 1;
 	public static final byte VERSION_MINOR = 1;
-	public static final byte VERSION_PATCH = 9;
+	public static final byte VERSION_PATCH = 10;
 
-	public static final int MANA_POINT_CONSUMPTION = 1;
+	public static final float MANA_CONSUMPTION = 1;
 	public static final int STATUS_EFFECT_DURATION = 600;
 	public static final int STATUS_EFFECT_AMPLIFIER = 0;
 	public static final boolean STATUS_EFFECT_AMBIENT = false;
 	public static final boolean STATUS_EFFECT_SHOW_PARTICLES = true;
 	public static final boolean STATUS_EFFECT_SHOW_ICON = true;
 
-	public static int manaPointConsumption;
+	public static float manaConsumption;
 	public static int speedDuration;
 	public static int speedAmplifier;
 	public static boolean speedAmbient;
 	public static boolean speedShowParticles;
 	public static boolean speedShowIcon;
-
-	public static int manaConsumption;
 
 	@Override
 	public void onInitialize() {
@@ -92,18 +89,17 @@ public class RogueSword implements ModInitializer {
 			configString = FileUtils.readFileToString(new File("./config/rogue-sword.json"), StandardCharsets.UTF_8);
 		} catch (IOException e) {
             reset();
-			reCalc();
 			return 1;
 		}
 
 		JsonObject config = new Gson().fromJson(configString, JsonObject.class);
 		MutableInt counter = new MutableInt(0);
 
-		if (config.has("manaPointConsumption")) {
-			manaPointConsumption = config.get("manaPointConsumption").getAsInt();
+		if (config.has("manaConsumption")) {
+			manaConsumption = config.get("manaConsumption").getAsFloat();
 			counter.increment();
 		} else {
-			manaPointConsumption = MANA_POINT_CONSUMPTION;
+			manaConsumption = MANA_CONSUMPTION;
 		}
 
 		if (config.has("speedDuration")) {
@@ -141,20 +137,15 @@ public class RogueSword implements ModInitializer {
 			speedShowIcon = STATUS_EFFECT_SHOW_ICON;
 		}
 
-		reCalc();
 		return counter.intValue();
 	}
 
 	public static void reset() {
-		manaPointConsumption = MANA_POINT_CONSUMPTION;
+		manaConsumption = MANA_CONSUMPTION;
 		speedDuration = STATUS_EFFECT_DURATION;
 		speedAmplifier = STATUS_EFFECT_AMPLIFIER;
 		speedAmbient = STATUS_EFFECT_AMBIENT;
 		speedShowParticles = STATUS_EFFECT_SHOW_PARTICLES;
 		speedShowIcon = STATUS_EFFECT_SHOW_ICON;
-	}
-
-	public static void reCalc() {
-		manaConsumption = Pentamana.manaPerPoint * manaPointConsumption;
 	}
 }
