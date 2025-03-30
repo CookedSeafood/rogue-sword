@@ -32,7 +32,7 @@ public class RogueSword implements ModInitializer {
 
 	public static final byte VERSION_MAJOR = 1;
 	public static final byte VERSION_MINOR = 1;
-	public static final byte VERSION_PATCH = 10;
+	public static final byte VERSION_PATCH = 11;
 
 	public static final float MANA_CONSUMPTION = 1;
 	public static final int STATUS_EFFECT_DURATION = 600;
@@ -56,9 +56,7 @@ public class RogueSword implements ModInitializer {
 
 		CommandRegistrationCallback.EVENT.register((dispatcher, registryAccess, environment) -> RogueSwordCommand.register(dispatcher, registryAccess));
 
-		ServerLifecycleEvents.SERVER_STARTED.register(server -> {
-			RogueSword.reload();
-		});
+		ServerLifecycleEvents.SERVER_STARTED.register(server -> reload());
 
 		UseItemCallback.EVENT.register((player, world, hand) -> {
 			if (Hand.OFF_HAND.equals(hand)) {
@@ -71,15 +69,15 @@ public class RogueSword implements ModInitializer {
 			}
 
 			if (!ManaPreferenceComponentInstance.MANA_PREFERENCE.get(player).isEnabled()) {
-				return ActionResult.PASS;
+				return ActionResult.FAIL;
 			}
 
 			if (!ServerManaBarComponentInstance.SERVER_MANA_BAR.get(player).getServerManaBar().consum(manaConsumption)) {
-				return ActionResult.PASS;
+				return ActionResult.FAIL;
 			}
 
 			player.addStatusEffect(new StatusEffectInstance(StatusEffects.SPEED, speedDuration, speedAmplifier, speedAmbient, speedShowParticles, speedShowIcon), player);
-			return ActionResult.PASS;
+			return ActionResult.SUCCESS;
 		});
 	}
 
@@ -88,7 +86,7 @@ public class RogueSword implements ModInitializer {
 		try {
 			configString = FileUtils.readFileToString(new File("./config/rogue-sword.json"), StandardCharsets.UTF_8);
 		} catch (IOException e) {
-            reset();
+			reset();
 			return 1;
 		}
 

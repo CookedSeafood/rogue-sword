@@ -3,7 +3,7 @@
 	"id": "rogue-sword",
 	"version": "${version}",
 	"name": "Rogue Sword",
-	"description": "A sword that gives a 30 second speed effect for 1 point of mana when right-clicked.",
+	"description": "A sword that gives a 30 second speed effect for 1 mana when right-clicked.",
 	"authors": [
 		{
 			"name": "CookedSeafood",
