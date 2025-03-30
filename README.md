@@ -31,4 +31,4 @@ Below is a template config file `config/rogue-sword.json` filled with default va
 }
 ```
 
-- `manaConsumption`: Amount of mana point will be consumed per use.
+- `manaConsumption`: Mana consumption per use.
