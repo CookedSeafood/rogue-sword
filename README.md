@@ -1,6 +1,6 @@
 # RogueSword
 
-Rogue Sword is a sword that gives a 30 second speed effect for 1 mana when right-clicked.
+Rogue Sword is an item that gives a 30 second speed effect for 1 mana when right-clicked.
 
 ## The Item
 
