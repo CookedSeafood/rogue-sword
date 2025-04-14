@@ -6,7 +6,7 @@ Rogue Sword is an item that gives a 30 second speed effect for 1 mana when right
 
 An item where `minecraft:item_name` is "Rogue Sword" is considered as a rogue sword.
 
-An example command that gives rogue sword to yourslef:
+An example command that gives a rogue sword to yourslef:
 
 ```mcfunction
 /give @s golden_sword[item_name="Rogue Sword"]
