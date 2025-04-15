@@ -3,7 +3,7 @@
 	"id": "rogue-sword",
 	"version": "${version}",
 	"name": "Rogue Sword",
-	"description": "A sword that gives a 30 second speed effect for 1 mana when right-clicked.",
+	"description": "An item that gives a 30 second speed effect for 1 mana when right-clicked.",
 	"authors": [
 		{
 			"name": "CookedSeafood",
@@ -28,12 +28,12 @@
 		"rogue-sword.mixins.json"
 	],
 	"depends": {
-		"fabricloader": ">=0.16.10",
+		"fabricloader": ">=0.16.13",
 		"minecraft": "~1.21.4",
 		"java": ">=21",
 		"fabric-api": "*",
 		"cardinal-components-base": ">=6.2.2",
-		"pentamana": ">=0.6.5"
+		"pentamana": ">=0.6.9"
 	},
 	"suggests": {
 		"another-mod": "*"

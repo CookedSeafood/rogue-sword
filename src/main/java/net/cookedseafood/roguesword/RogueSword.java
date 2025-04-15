@@ -12,9 +12,11 @@ import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
 import net.fabricmc.fabric.api.event.player.UseItemCallback;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.item.ItemStack;
+import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import org.apache.commons.io.FileUtils;
@@ -32,7 +34,7 @@ public class RogueSword implements ModInitializer {
 
 	public static final byte VERSION_MAJOR = 1;
 	public static final byte VERSION_MINOR = 1;
-	public static final byte VERSION_PATCH = 11;
+	public static final byte VERSION_PATCH = 12;
 
 	public static final float MANA_CONSUMPTION = 1;
 	public static final int STATUS_EFFECT_DURATION = 600;
@@ -76,9 +78,13 @@ public class RogueSword implements ModInitializer {
 				return ActionResult.FAIL;
 			}
 
-			player.addStatusEffect(new StatusEffectInstance(StatusEffects.SPEED, speedDuration, speedAmplifier, speedAmbient, speedShowParticles, speedShowIcon), player);
+			usedBy((ServerPlayerEntity)player);
 			return ActionResult.SUCCESS;
 		});
+	}
+
+	public static void usedBy(LivingEntity entity) {
+		entity.addStatusEffect(new StatusEffectInstance(StatusEffects.SPEED, speedDuration, speedAmplifier, speedAmbient, speedShowParticles, speedShowIcon), entity);
 	}
 
 	public static int reload() {
