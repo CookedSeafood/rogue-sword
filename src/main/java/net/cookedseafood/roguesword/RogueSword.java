@@ -33,8 +33,8 @@ public class RogueSword implements ModInitializer {
 	public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
 
 	public static final byte VERSION_MAJOR = 1;
-	public static final byte VERSION_MINOR = 1;
-	public static final byte VERSION_PATCH = 12;
+	public static final byte VERSION_MINOR = 2;
+	public static final byte VERSION_PATCH = 0;
 
 	public static final float MANA_CONSUMPTION = 1;
 	public static final int STATUS_EFFECT_DURATION = 600;
@@ -66,7 +66,7 @@ public class RogueSword implements ModInitializer {
 			}
 
 			ItemStack stack = player.getMainHandStack();
-			if (!"Rogue Sword".equals(stack.getItemName().getString())) {
+			if (!"rogue-sword".equals(stack.getCustomId())) {
 				return ActionResult.PASS;
 			}
 
