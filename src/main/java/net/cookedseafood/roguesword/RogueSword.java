@@ -19,6 +19,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
+import net.minecraft.util.Identifier;
+
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.mutable.MutableInt;
 import org.slf4j.Logger;
@@ -34,9 +36,10 @@ public class RogueSword implements ModInitializer {
 
 	public static final byte VERSION_MAJOR = 1;
 	public static final byte VERSION_MINOR = 3;
-	public static final byte VERSION_PATCH = 0;
+	public static final byte VERSION_PATCH = 1;
 
-	public static final String ROGUE_SWORD_CUSTOM_ID = "rogue_sword:rogue_sword";
+	public static final String MOD_NAMESPACE = "rogue_sword";
+	public static final String ROGUE_SWORD_CUSTOM_ID = Identifier.of(MOD_NAMESPACE, "rogue_sword").toString();
 
 	public static final float MANA_CONSUMPTION = 1;
 	public static final int STATUS_EFFECT_DURATION = 600;
