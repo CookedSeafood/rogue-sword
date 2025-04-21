@@ -15,7 +15,7 @@ An example command that gives a rogue sword to yourslef:
 Another example command for the original design:
 
 ```mcfunction
-/give @s golden_sword[custom_data={id:"rogue_sword:rogue_sword"},item_name="Rogue Sword",rarity=uncommon]
+/give @s golden_sword[custom_data={id:"rogue_sword:rogue_sword"},item_name='{"text":"Rogue Sword"}',rarity=uncommon]
 ```
 
 ## Configuration
