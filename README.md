@@ -4,7 +4,7 @@ Rogue Sword is an item that gives a 30 second speed effect for 1 mana when right
 
 ## The Item
 
-An item where `minecraft:custom_data/id` is "rogue_sword:rogue_sword" is considered as a rogue sword.
+An item where `minecraft:custom_data.id` is "rogue_sword:rogue_sword" is considered as a rogue sword.
 
 An example command that gives a rogue sword to yourslef:
 
@@ -15,7 +15,7 @@ An example command that gives a rogue sword to yourslef:
 Another example command for the original design:
 
 ```mcfunction
-/give @s golden_sword[custom_data={id:"rogue_sword:rogue_sword"},item_name='{"text":"Rogue Sword"}',rarity=uncommon]
+/give @s golden_sword[custom_data={id:"rogue_sword:rogue_sword"},item_name={"text":"Rogue Sword"},rarity=uncommon]
 ```
 
 ## Configuration
@@ -33,4 +33,6 @@ Below is a template config file `config/rogue-sword.json` filled with default va
 }
 ```
 
-- `manaConsumption`: Mana consumption per use.
+### `manaConsumption`
+
+Mana consumption per use.
