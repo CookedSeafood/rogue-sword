@@ -45,6 +45,8 @@ dependencies {
 
     modImplementation "maven.modrinth:candy-wrapper:${project.cw_version}"
 
+    modImplementation "maven.modrinth:general-custom-data:${project.gcd_version}"
+
     modImplementation "maven.modrinth:pentamana:${project.pentamana_version}"
 }
 
