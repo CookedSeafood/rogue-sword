@@ -26,7 +26,7 @@ public class RogueSword implements ModInitializer {
     public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
 
     public static final byte VERSION_MAJOR = 1;
-    public static final byte VERSION_MINOR = 5;
+    public static final byte VERSION_MINOR = 6;
     public static final byte VERSION_PATCH = 0;
 
     public static final String MOD_NAMESPACE = "rogue_sword";
@@ -52,16 +52,15 @@ public class RogueSword implements ModInitializer {
                 return ActionResult.PASS;
             }
 
-            if (!player.consumMana(RogueSwordConfig.manaConsumption)) {
-                return ActionResult.FAIL;
-            }
-
-            usedBy((ServerPlayerEntity)player);
-            return ActionResult.SUCCESS;
+            return usedBy((ServerPlayerEntity)player) ? ActionResult.SUCCESS : ActionResult.FAIL;
         });
     }
 
-    public static void usedBy(LivingEntity entity) {
-        entity.addStatusEffect(new StatusEffectInstance(StatusEffects.SPEED, RogueSwordConfig.speedDuration, RogueSwordConfig.speedAmplifier, RogueSwordConfig.speedAmbient, RogueSwordConfig.speedShowParticles, RogueSwordConfig.speedShowIcon), entity);
+    public static boolean usedBy(LivingEntity entity) {
+        if (!entity.consumMana(RogueSwordConfig.manaConsumption)) {
+            return false;
+        }
+
+        return entity.addStatusEffect(new StatusEffectInstance(StatusEffects.SPEED, RogueSwordConfig.speedDuration, RogueSwordConfig.speedAmplifier, RogueSwordConfig.speedAmbient, RogueSwordConfig.speedShowParticles, RogueSwordConfig.speedShowIcon), entity);
     }
 }
