@@ -24,7 +24,7 @@ Below is a template config file `config/rogue-sword.json` filled with default va
 
 ```json
 {
-  "manaConsumption": 1,
+  "manaConsumption": 1.0,
   "speedDuration": 600,
   "speedAmplifier": 0,
   "speedAmbient": false,
