@@ -1,21 +1,64 @@
 # RogueSword
 
-Rogue Sword is an item that gives a 30 second speed effect for 1 mana when right-clicked.
+A **rogue sword** is a casting utility that is used to get temporary speed effect.
 
-## The Item
+| Statistics ||
+| - | - |
+| Melee Damage | 4 |
+| Mana Consumption| 1 |
+| Rarity | Uncommon |
 
-An item where `minecraft:custom_data.id` is "rogue_sword:rogue_sword" is considered as a rogue sword.
+## Usage
 
-An example command that gives a rogue sword to yourslef:
+### Melee Attack
+
+Same as a [golden sword](https://minecraft.wiki/w/Golden_Sword).
+
+### Speed Effect
+
+Pressing use while holding a rogue sword in main hand give the player speed effect with amplifier 1 for 30 seconds and consumes 1 mana.
+
+#### Mana Consumption with Ultilization
+
+| Base Mana Consumption | Utilization I | Utilization II | Utilization III | Utilization IV | Utilization V |
+| :-: | :-: | :-: | :-: | :-: | :-: |
+| 1.0 | 0.9 | 0.8 | 0.7 | 0.6 | 0.5 |
+
+## Data Powered
+
+An item where `minecraft:custom_data.id` is "rogue_sword:rogue_sword" is considered as an rogue sword.
+
+### Give Command
 
 ```mcfunction
-/give @s golden_sword[custom_data={id:"rogue_sword:rogue_sword"}]
+/give @s minecraft:golden_sword[custom_data={id:"rogue_sword:rogue_sword"},item_name={text:"Rogue Sword"},rarity="uncommon"]
 ```
 
-Another example command for the original design:
+### Loot Table Entry
 
-```mcfunction
-/give @s golden_sword[custom_data={id:"rogue_sword:rogue_sword"},item_name={text:"Rogue Sword"},rarity="uncommon"]
+```json
+{
+    "type": "minecraft:item",
+    "functions": [
+        {
+            "function": "minecraft:set_components",
+            "components": {
+            "minecraft:custom_data": {
+                "id": "rogue_sword:rogue_sword"
+            },
+            "minecraft:rarity": "uncommon"
+            }
+        },
+        {
+            "function": "minecraft:set_name",
+            "name": {
+                "text": "Rogue Sword"
+            },
+            "target": "item_name"
+        }
+    ],
+    "name": "minecraft:golden_sword"
+}
 ```
 
 ## Configuration
@@ -32,7 +75,3 @@ Below is a template config file `config/rogue-sword.json` filled with default va
   "speedShowIcon": true
 }
 ```
-
-### `manaConsumption`
-
-Mana consumption per use.

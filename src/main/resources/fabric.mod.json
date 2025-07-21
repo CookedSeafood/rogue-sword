@@ -3,7 +3,7 @@
     "id": "rogue-sword",
     "version": "${version}",
     "name": "Rogue Sword",
-    "description": "An item that gives a 30 second speed effect for 1 mana when right-clicked.",
+    "description": "A casting utility that is used to get temporary speed effect.",
     "authors": [
         {
             "name": "CookedSeafood",
@@ -33,7 +33,7 @@
         "java": ">=21",
         "fabric-api": "*",
         "candy-wrapper": ">=0.7.5",
-        "general-custom-data": ">=0.1.5",
+        "general-custom-data": ">=0.1.6",
         "pentamana": ">=0.8.2"
     },
     "suggests": {

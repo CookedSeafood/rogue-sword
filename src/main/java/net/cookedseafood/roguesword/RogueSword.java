@@ -26,7 +26,7 @@ public class RogueSword implements ModInitializer {
     public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
 
     public static final byte VERSION_MAJOR = 1;
-    public static final byte VERSION_MINOR = 6;
+    public static final byte VERSION_MINOR = 7;
     public static final byte VERSION_PATCH = 0;
 
     public static final String MOD_NAMESPACE = "rogue_sword";
