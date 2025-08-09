@@ -18,9 +18,9 @@ Same as a [golden sword](https://minecraft.wiki/w/Golden_Sword).
 
 Pressing use while holding a rogue sword in main hand give the player speed effect with amplifier 1 for 30 seconds and consumes 1 mana.
 
-#### Mana Consumption with Ultilization
+#### Mana Consumption with Mana Efficiency
 
-| Base Mana Consumption | Utilization I | Utilization II | Utilization III | Utilization IV | Utilization V |
+| Base Mana Consumption | Mana Efficiency I | Mana Efficiency II | Mana Efficiency III | Mana Efficiency IV | Mana Efficiency V |
 | :-: | :-: | :-: | :-: | :-: | :-: |
 | 1.0 | 0.9 | 0.8 | 0.7 | 0.6 | 0.5 |
 
